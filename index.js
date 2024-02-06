@@ -10,7 +10,6 @@ window.addEventListener('load', ()=> {
     let descripcion = document.getElementById('descripcion')
     let imagen = document.getElementById('imagen_clima')
 
-    let sensacion = document.getElementById('sensacion')
     let viento = document.getElementById('viento')
     let humedad = document.getElementById('humedad')
 
@@ -65,44 +64,36 @@ window.addEventListener('load', ()=> {
                     ubicacion.textContent = data.name  // obtengo el nombre de la ciudad
                     datos.textContent = `${diaDeLaSemana} ${diaActual}, ${horaActual}:${minutosActuales}hs` // imprimo la fecha y hora del día en tiempo real
 
-                    
-                    temperatura.textContent = Math.round(data.main.temp) + '°C' // obtengo la temperatura y la imprimo 
-                    descripcion.textContent = data.weather[0].description // obtengo la descripción del clima y la imprimo 
-
-                    sensacion.textContent = Math.round(data.main.feels_like) + '°C' // obtengo la sensación térmica y la imprimo
-                    viento.textContent = `${data.wind.speed}m/s` // obtengo la velocidad del viento y la imprimo 
-                    humedad.textContent = `${data.main.humidity}%` // obtengo el % de humedad y al imprimo 
-
                     let codigoImg = data.weather[0].icon; // obtengo el código de tipo de clima
                     // creo un condiciona que devuelve una imagen de acuerdo al código del clima*/
-                    if(codigoImg == '01d'){
-                        imagen.src='img/dia_despejado.png';
+                    if(codigoImg == '01d' || codigoImg == '01n'){
+                        imagen.src='img/despejado.png.png';
                     }
-                    else if(codigoImg == '02d'){
-                        imagen.src='img/dia_nublado.png';
-                    }
-                    else if(codigoImg == '03d' || codigoImg == '03n' || codigoImg == '04d' || codigoImg == '04n'){
+                    else if(codigoImg == '02d' || codigoImg == '02n' || codigoImg == '03d' || codigoImg == '03n' || codigoImg == '04d' || codigoImg == '04n'){
                         imagen.src='img/nublado.png';
                     }
                     else if(codigoImg == '09d' || codigoImg == '09n'){
-                        imagen.src='img/lluvia.png';
+                        imagen.src='img/lluvioso.png.png.png';
                     }
                     else if(codigoImg == '11d' || codigoImg == '11n'){
-                        imagen.src='img/tormenta.png';
-                    }
-                    else if(codigoImg == '01n'){
-                        imagen.src='img/noche_despejadaa.png';
-                    }
-                    else if(codigoImg == '02n'){
-                        imagen.src='img/noche_nublada.png';
+                        imagen.src='img/tormenta.png.png';
                     }
                     else if(codigoImg == '13d' || codigoImg =='13n'){
                         imagen.src='img/nieve.png';
                     }
                     else{
-                        imagen.src='img/neblina.png'
+                        imagen.src='img/neblina.png.png'
                     }
+                    
+                    temperatura.textContent = Math.round(data.main.temp) + '°C' // obtengo la temperatura y la imprimo 
+                    descripcion.textContent = data.weather[0].description // obtengo la descripción del clima y la imprimo 
+
+                    viento.textContent = `${data.wind.speed}m/s` // obtengo la velocidad del viento y la imprimo 
+                    humedad.textContent = `${data.main.humidity}%` // obtengo el % de humedad y al imprimo 
                 })
+            .catch( error => {
+                console.log(error)
+            })
         })
     }
 })
